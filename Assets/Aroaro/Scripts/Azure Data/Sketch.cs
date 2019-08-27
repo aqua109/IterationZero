@@ -90,4 +90,35 @@ public class Sketch : MonoBehaviour
         i--;
     }
 
+    public void createAllUsers()
+    {
+        foreach (DataItemProto dataItem in dataItems)
+        {
+            var newuser = (GameObject)Instantiate(user, new Vector3(4, 1, -2), Quaternion.identity);
+            users.Add(newuser);
+            var nameText = newuser.transform.Find("Name").GetComponentInChildren<TextMeshPro>();
+            nameText.SetText(dataItem.Name);
+
+            var shapeText = newuser.transform.Find("Shape").GetComponentInChildren<TextMeshPro>();
+            shapeText.SetText(dataItem.Shape);
+            var colourText = newuser.transform.Find("Colour").GetComponentInChildren<TextMeshPro>();
+            colourText.SetText(dataItem.Colour);
+            var sizeText = newuser.transform.Find("Size").GetComponentInChildren<TextMeshPro>();
+            sizeText.SetText(dataItem.Size.ToString());
+            var whenText = newuser.transform.Find("When").GetComponentInChildren<TextMeshPro>();
+            whenText.SetText(dataItem.When.ToString());
+            i++;
+        }
+    }
+
+    public void removeAllUsers()
+    {
+        foreach (GameObject u in users.ToArray())
+        {
+            users.Remove(u);
+            Destroy(u);
+            i--;
+        }
+    }
+
 }
